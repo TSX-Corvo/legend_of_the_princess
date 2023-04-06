@@ -62,5 +62,24 @@ GAME_OBJECT_DEFS = {
             player:heal(2)
             SOUNDS['heart-taken']:play()
         end
-    }
+    },
+    ['chest'] = {
+        type = 'chest',
+        texture = 'chest',
+        frame = 1,
+        width = 16,
+        height = 16,
+        solid = true,
+        consumable = false,
+        defaultState = 'default',
+        takeable = false,
+        states = {
+            ['default'] = {
+                frame = 1
+            },
+            ['open'] = {
+                frame = 2
+            }
+        }
+    },
 }

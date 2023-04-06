@@ -239,6 +239,18 @@ function Room:generateObjects()
         end
     end
 
+    -- spawn a chest
+    table.insert(self.objects, GameObject(
+        GAME_OBJECT_DEFS['chest'],
+        math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
+                    VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
+        math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
+                    VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
+    ))
+
+    -- get a reference to the switch
+    local chest = self.objects[2]
+
     for y = 2, self.height -1 do
         for x = 2, self.width - 1 do
             -- change to spawn a pot
