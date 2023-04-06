@@ -127,3 +127,16 @@ SOUNDS = {
     ['heart-taken'] = love.audio.newSource('sounds/heart_taken.wav', 'static'),
     ['pot-wall'] = love.audio.newSource('sounds/pot_wall.wav', 'static')
 }
+
+function dump(o)
+    if type(o) == 'table' then
+       local s = '{ '
+       for k,v in pairs(o) do
+          if type(k) ~= 'number' then k = '"'..k..'"' end
+          s = s .. '['..k..'] = ' .. dump(v) .. ','
+       end
+       return s .. '} '
+    else
+       return tostring(o)
+    end
+ end

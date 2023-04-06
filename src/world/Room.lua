@@ -251,6 +251,15 @@ function Room:generateObjects()
     -- get a reference to the switch
     local chest = self.objects[2]
 
+    chest.onInteract = function()
+        if chest.state == 'default' then
+            chest.state = 'open'
+
+            -- SOUNDS['door']:play()
+        end
+    end
+
+
     for y = 2, self.height -1 do
         for x = 2, self.width - 1 do
             -- change to spawn a pot

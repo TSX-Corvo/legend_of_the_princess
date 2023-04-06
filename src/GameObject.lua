@@ -43,6 +43,10 @@ function GameObject:init(def, x, y)
     -- an object could be taken or not
     self.takeable = def.takeable
     self.taken = false
+
+    -- you can interact with an object or not
+    self.interactable = def.interactable
+    self.onInteract = function() end
 end
 
 function GameObject:update(dt)
