@@ -24,6 +24,8 @@ require 'src/StateMachine'
 require 'src/definitions/entity'
 require 'src/definitions/game_objects'
 
+require 'src/Bow'
+
 require 'src/states/BaseState'
 
 require 'src/states/entity/EntityIdleState'
@@ -35,12 +37,15 @@ require 'src/states/entity/player/PlayerWalkState'
 require 'src/states/entity/player/PlayerPotLiftState'
 require 'src/states/entity/player/PlayerPotIdleState'
 require 'src/states/entity/player/PlayerPotWalkState'
+require 'src/states/entity/player/PlayerFireState'
 
 require 'src/states/game/GameOverState'
 require 'src/states/game/PlayState'
 require 'src/states/game/StartState'
 
 require 'src/utilities/quads'
+require 'src/utilities/dirtoangle'
+require 'src/utilities/factory'
 
 require 'src/world/Doorway'
 require 'src/world/Dungeon'
@@ -96,7 +101,9 @@ TEXTURES = {
     ['entities'] = love.graphics.newImage('graphics/entities.png'),
     ['character-pot-lift'] = love.graphics.newImage('graphics/character_pot_lift.png'),
     ['character-pot-walk'] = love.graphics.newImage('graphics/character_pot_walk.png'),
-    ['chest'] = love.graphics.newImage('graphics/chest.png')
+    ['chest'] = love.graphics.newImage('graphics/chest.png'),
+    ['bow'] = love.graphics.newImage('graphics/bow.png'),
+    ['arrow'] = love.graphics.newImage('graphics/arrow.png')
 }
 
 FRAMES = {
@@ -109,6 +116,8 @@ FRAMES = {
     ['character-pot-lift'] = generateQuads(TEXTURES['character-pot-lift'], 16, 32),
     ['character-pot-walk'] = generateQuads(TEXTURES['character-pot-walk'], 16, 32),
     ['chest'] = generateQuads(TEXTURES['chest'], 16, 16),
+    ['bow'] = generateQuads(TEXTURES['bow'], 24, 24),
+    ['arrow'] = generateQuads(TEXTURES['arrow'], 20, 12),
 }
 
 FONTS = {
