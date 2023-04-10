@@ -11,9 +11,10 @@
 ]]
 Room = Class{}
 
-function Room:init(player)
+function Room:init(player, dungeon)
     -- reference to player for collisions, etc.
     self.player = player
+    self.dungeon = dungeon
 
     self.width = MAP_WIDTH
     self.height = MAP_HEIGHT
@@ -240,24 +241,26 @@ function Room:generateObjects()
     end
 
     -- spawn a chest
-    table.insert(self.objects, GameObject(
-        GAME_OBJECT_DEFS['chest'],
-        math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
-                    VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
-        math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
-                    VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
-    ))
-
-    -- get a reference to the switch
-    local chest = self.objects[2]
-
-    chest.onInteract = function()
-        if chest.state == 'default' then
-            chest.state = 'open'
-
-            -- SOUNDS['door']:play()
+    if not self.dungeon.bow_acquired then     
+        table.insert(self.objects, GameObject(
+            GAME_OBJECT_DEFS['chest'],
+            math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
+                        VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
+            math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
+                        VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
+        ))
+     
+        -- get a reference to the switch
+        local chest = self.objects[2]
+    
+        chest.onInteract = function()
+            if chest.state == 'default' then
+                chest.state = 'open'
+                self.dungeon.bow_acquired = true
+            end
         end
     end
+
 
 
     for y = 2, self.height -1 do

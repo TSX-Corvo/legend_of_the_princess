@@ -24,7 +24,7 @@ function PlayerIdleState:update(dt)
         self.entity:changeState('walk')
     end
 
-    if love.keyboard.wasPressed('f') then
+    if love.keyboard.wasPressed('f') and self.dungeon.bow_acquired then
         self.entity:changeState('fire')
     end
 
