@@ -24,12 +24,19 @@ function Room:init(player, dungeon)
 
     -- entities in the room
     self.entities = {}
-    self:generateEntities()
 
     -- game objects in the room
     self.objects = {}
-    self:generateObjects()
 
+    if math.random(1) == 1 and self.dungeon.bow_acquired then
+        -- boss encounter
+        self:generateBoss()
+    else
+        self:generateEntities()
+    
+        self:generateObjects()
+    end
+    
     -- doorways that lead to other dungeon rooms
     self.doorways = {}
     table.insert(self.doorways, Doorway('top', false, self))
@@ -75,10 +82,10 @@ function Room:update(dt)
         -- collision between the player and entities in the room
         if not entity.dead and self.player:collides(entity) and not self.player.invulnerable then
             SOUNDS['hit-player']:play()
-            self.player:damage(1)
+            self.player:damage(entity.contactDamage)
             self.player:goInvulnerable(1.5)
 
-            if self.player.health == 0 then
+            if self.player.health <= 0 then
                 stateMachine:change('game-over')
             end
         end
@@ -126,6 +133,7 @@ function Room:update(dt)
 
             if not entity.dead and projectile:collides(entity) then
                 entity:damage(1)
+                entity:goInvulnerable(0.5)
                 SOUNDS['hit-enemy']:play()
                 projectile.dead = true
             end
@@ -209,6 +217,34 @@ function Room:generateEntities()
 
         self.entities[i]:changeState('walk')
     end
+end
+
+function Room:generateBoss()
+
+    local type = 'boss'
+
+    table.insert(self.entities, Entity {
+        animations = ENTITY_DEFS[type].animations,
+        walkSpeed = ENTITY_DEFS[type].walkSpeed or 20,
+
+        -- ensure X and Y are within bounds of the map
+        x = VIRTUAL_WIDTH / 2,
+        y = VIRTUAL_HEIGHT / 2,
+        
+        width = 32,
+        height = 32,
+
+        health = 10,
+
+        contactDamage = ENTITY_DEFS[type].contactDamage
+    })
+
+    self.entities[1].stateMachine = StateMachine {
+        ['walk'] = function() return EntityWalkState(self.entities[1]) end,
+        ['idle'] = function() return EntityIdleState(self.entities[1]) end
+    }
+
+    self.entities[1]:changeState('walk')
 end
 
 --[[
