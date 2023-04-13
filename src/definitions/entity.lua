@@ -208,6 +208,42 @@ ENTITY_DEFS = {
             ['idle-up'] = {
                 frames = {11},
                 texture = 'bosst'
+            },
+            ['walk-left-alter'] = {
+                frames = {16, 17, 18, 17},
+                interval = 0.2,
+                texture = 'bosst'
+            },
+            ['walk-right-alter'] = {
+                frames = {19, 20, 21, 20},
+                interval = 0.2,
+                texture = 'bosst'
+            },
+            ['walk-down-alter'] = {
+                frames = {13, 14, 15, 14},
+                interval = 0.2,
+                texture = 'bosst'
+            },
+            ['walk-up-alter'] = {
+                frames = {22, 23, 24, 23},
+                interval = 0.2,
+                texture = 'bosst'
+            },
+            ['idle-left-alter'] = {
+                frames = {17},
+                texture = 'bosst'
+            },
+            ['idle-right-alter'] = {
+                frames = {20},
+                texture = 'bosst'
+            },
+            ['idle-down-alter'] = {
+                frames = {14},
+                texture = 'bosst'
+            },
+            ['idle-up-alter'] = {
+                frames = {23},
+                texture = 'bosst'
             }
         }
     },

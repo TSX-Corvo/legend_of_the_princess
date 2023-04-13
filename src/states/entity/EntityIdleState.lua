@@ -36,7 +36,9 @@ end
 
 function EntityIdleState:render()
     local anim = self.entity.currentAnimation
-    love.graphics.draw(TEXTURES[anim.texture], FRAMES[anim.texture][anim:getCurrentFrame()],
+
+    local frame = anim:getCurrentFrame() + (self.entity.armored and 12 or 0)
+    love.graphics.draw(TEXTURES[anim.texture], FRAMES[anim.texture][frame],
         math.floor(self.entity.x - self.entity.offsetX), math.floor(self.entity.y - self.entity.offsetY))
     
     -- love.graphics.setColor(love.math.colorFromBytes(255, 0, 255, 255))
