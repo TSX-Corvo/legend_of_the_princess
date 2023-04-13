@@ -303,7 +303,7 @@ function Room:generateObjects()
     end
 
     -- spawn a chest
-    if not self.dungeon.bow_acquired and math.random(3) == 1 then     
+    if math.random(3) == 1 and not self.dungeon.bow_acquired then     
         table.insert(self.objects, GameObject(
             GAME_OBJECT_DEFS['chest'],
             math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
