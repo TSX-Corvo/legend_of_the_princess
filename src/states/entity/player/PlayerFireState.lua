@@ -39,7 +39,6 @@ function PlayerFireState:enter(params)
     local arrow = self.bow:fire()
     table.insert(self.dungeon.currentRoom.projectiles, Projectile(arrow, self.player.direction))
     self.player.currentAnimation:refresh()
-    print(dump(self.dungeon.currentRoom.projectiles))
 end
 
 function PlayerFireState:update(dt)
