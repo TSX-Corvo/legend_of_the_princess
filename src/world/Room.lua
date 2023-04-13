@@ -251,7 +251,7 @@ function Room:generateBoss()
     })
 
     self.entities[1].stateMachine = StateMachine {
-        ['walk'] = function() return EntityWalkState(self.entities[1]) end,
+        ['walk'] = function() return BossWalkState(self.entities[1]) end,
         ['idle'] = function() return EntityIdleState(self.entities[1]) end
     }
 
