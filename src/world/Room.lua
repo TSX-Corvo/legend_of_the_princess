@@ -28,14 +28,12 @@ function Room:init(player, dungeon)
     -- game objects in the room
     self.objects = {}
 
-    if math.random(1) == 1 and self.dungeon.bow_acquired then
+    if math.random(2) == 1 and self.dungeon.bow_acquired then
         -- boss encounter
         self:generateBoss()
     else
-        self:generateBoss()
-        -- self:generateEntities()
-    
-        -- self:generateObjects()
+        self:generateEntities()
+        self:generateObjects()
     end
     
     -- doorways that lead to other dungeon rooms
@@ -155,7 +153,7 @@ function Room:update(dt)
             if not self.player.dead and projectile:collides(self.player) and not self.player.invulnerable then
                 
                 SOUNDS['hit-player']:play()
-                -- self.player:damage(6)
+                self.player:damage(6)
                 self.player:goInvulnerable(1.5)
     
                 if self.player.health <= 0 then
@@ -305,7 +303,7 @@ function Room:generateObjects()
     end
 
     -- spawn a chest
-    if not self.dungeon.bow_acquired then     
+    if not self.dungeon.bow_acquired and math.random(3) == 1 then     
         table.insert(self.objects, GameObject(
             GAME_OBJECT_DEFS['chest'],
             math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
