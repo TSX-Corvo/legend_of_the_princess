@@ -25,6 +25,29 @@ function BossWalkState:processAI(params, dt)
     elseif self.movementTimer > self.moveDuration then
         self.movementTimer = 0
 
+        -- chance to shoot fireball
+        if math.random(5) == 1 then
+            local player = room.player
+            local angle = math.atan2(-player.y + self.entity.y, -player.x + self.entity.x) + math.pi
+            local props = {
+                x = self.entity.x + 16,
+                y = self.entity.y + 16,
+                width = 8,
+                height = 8,
+                render = function (self_, x_, y_)
+                    love.graphics.draw(TEXTURES['fireball'], FRAMES['fireball'][1], 
+                        self_.x, self_.y,
+                        angle,
+                        1.0,
+                        1.0
+                    )    
+                end
+            }
+            
+            local fireball = BossProjectile(props, angle)
+            table.insert(room.projectiles, fireball)
+        end
+
         -- chance to go idle
         if math.random(3) == 1 then
             self.entity:changeState('idle')

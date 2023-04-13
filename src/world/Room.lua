@@ -126,25 +126,42 @@ function Room:update(dt)
     for k, projectile in pairs(self.projectiles) do
         projectile:update(dt)
 
-        -- check collision with entities
-        for e, entity in pairs(self.entities) do
-            if projectile.dead then
-                break
-            end
-
-            if not entity.dead and projectile:collides(entity) then
-                if entity.armored then
-                    entity.armored = false
-                    -- set timer
-                    local function restoreInmune()
-                        entity.armored = true
-                    end
-                    Timer.after(5, restoreInmune)
-                else    
-                    entity:damage(1)
-                    entity:goInvulnerable(0.5)
+        if projectile.owner == 'player' then
+            -- check collision with entities
+            for e, entity in pairs(self.entities) do
+                if projectile.dead then
+                    break
                 end
-                SOUNDS['hit-enemy']:play()
+    
+                if not entity.dead and projectile:collides(entity) then
+                    if entity.armored then
+                        entity.armored = false
+                        -- set timer
+                        local function restoreInmune()
+                            entity.armored = true
+                        end
+                        Timer.after(5, restoreInmune)
+                    else    
+                        entity:damage(1)
+                        entity:goInvulnerable(0.5)
+                    end
+                    SOUNDS['hit-enemy']:play()
+                    projectile.dead = true
+                end
+            end
+        else
+            -- check collision with player
+    
+            if not self.player.dead and projectile:collides(self.player) and not self.player.invulnerable then
+                
+                SOUNDS['hit-player']:play()
+                -- self.player:damage(6)
+                self.player:goInvulnerable(1.5)
+    
+                if self.player.health <= 0 then
+                    stateMachine:change('game-over')
+                end
+             
                 projectile.dead = true
             end
         end

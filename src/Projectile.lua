@@ -17,6 +17,7 @@ function Projectile:init(obj, direction)
     self.direction = direction
     self.distance = 0
     self.dead = false
+    self.owner = obj.owner or 'player'
 end
 
 function Projectile:update(dt)

@@ -48,6 +48,7 @@ function Entity:init(def)
     self.contactDamage = def.contactDamage or 1
 
     self.armored = def.armored or false
+    self.type = def.type or 'mob'
 end
 
 function Entity:createAnimations(animations)

@@ -19,6 +19,7 @@ require 'src/GameObject'
 require 'src/Hitbox'
 require 'src/Player'
 require 'src/Projectile'
+require 'src/BossProjectile'
 require 'src/StateMachine'
 
 require 'src/definitions/entity'
