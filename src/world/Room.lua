@@ -32,9 +32,10 @@ function Room:init(player, dungeon)
         -- boss encounter
         self:generateBoss()
     else
-        self:generateEntities()
+        self:generateBoss()
+        -- self:generateEntities()
     
-        self:generateObjects()
+        -- self:generateObjects()
     end
     
     -- doorways that lead to other dungeon rooms
@@ -132,8 +133,17 @@ function Room:update(dt)
             end
 
             if not entity.dead and projectile:collides(entity) then
-                entity:damage(1)
-                entity:goInvulnerable(0.5)
+                if entity.armored then
+                    entity.armored = false
+                    -- set timer
+                    local function restoreInmune()
+                        entity.armored = true
+                    end
+                    Timer.after(5, restoreInmune)
+                else    
+                    entity:damage(1)
+                    entity:goInvulnerable(0.5)
+                end
                 SOUNDS['hit-enemy']:play()
                 projectile.dead = true
             end
@@ -236,7 +246,8 @@ function Room:generateBoss()
 
         health = 10,
 
-        contactDamage = ENTITY_DEFS[type].contactDamage
+        contactDamage = ENTITY_DEFS[type].contactDamage,
+        armored = ENTITY_DEFS[type].armored
     })
 
     self.entities[1].stateMachine = StateMachine {

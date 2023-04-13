@@ -46,6 +46,8 @@ function Entity:init(def)
     --  track whether entity has dropped items or not
     self.dropped = false
     self.contactDamage = def.contactDamage or 1
+
+    self.armored = def.armored or false
 end
 
 function Entity:createAnimations(animations)

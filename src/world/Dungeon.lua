@@ -25,7 +25,7 @@ function Dungeon:init(player)
     self.shifting = false
 
     -- wether or not the player has acquired the bow
-    self.bow_acquired = false
+    self.bow_acquired = true
 
     -- trigger camera translation and adjustment of rooms whenever the player triggers a shift
     -- via a doorway collision, triggered in PlayerWalkState

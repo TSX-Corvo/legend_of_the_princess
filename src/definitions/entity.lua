@@ -169,36 +169,45 @@ ENTITY_DEFS = {
         }
     },
     ['boss'] = {
-        texture = 'entities',
+        texture = 'bosst',
         contactDamage = 2,
+        armored = true,
         animations = {
             ['walk-left'] = {
-                frames = {22, 23, 24, 23},
-                interval = 0.2
+                frames = {4, 5, 6, 5},
+                interval = 0.2,
+                texture = 'bosst'
             },
             ['walk-right'] = {
-                frames = {34, 35, 36, 35},
-                interval = 0.2
+                frames = {7, 8, 9, 8},
+                interval = 0.2,
+                texture = 'bosst'
             },
             ['walk-down'] = {
-                frames = {10, 11, 12, 11},
-                interval = 0.2
+                frames = {1, 2, 3, 2},
+                interval = 0.2,
+                texture = 'bosst'
             },
             ['walk-up'] = {
-                frames = {46, 47, 48, 47},
-                interval = 0.2
+                frames = {10, 11, 12, 11},
+                interval = 0.2,
+                texture = 'bosst'
             },
             ['idle-left'] = {
-                frames = {23}
+                frames = {5},
+                texture = 'bosst'
             },
             ['idle-right'] = {
-                frames = {35}
+                frames = {8},
+                texture = 'bosst'
             },
             ['idle-down'] = {
-                frames = {11}
+                frames = {2},
+                texture = 'bosst'
             },
             ['idle-up'] = {
-                frames = {47}
+                frames = {11},
+                texture = 'bosst'
             }
         }
     },

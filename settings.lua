@@ -103,8 +103,10 @@ TEXTURES = {
     ['character-pot-walk'] = love.graphics.newImage('graphics/character_pot_walk.png'),
     ['chest'] = love.graphics.newImage('graphics/chest.png'),
     ['bow'] = love.graphics.newImage('graphics/bow.png'),
-    ['arrow'] = love.graphics.newImage('graphics/arrow.png')
+    ['arrow'] = love.graphics.newImage('graphics/arrow.png'),
+    ['bosst'] = love.graphics.newImage('graphics/bosst.png')
 }
+
 
 FRAMES = {
     ['tiles'] = generateQuads(TEXTURES['tiles'], 16, 16),
@@ -118,7 +120,9 @@ FRAMES = {
     ['chest'] = generateQuads(TEXTURES['chest'], 16, 16),
     ['bow'] = generateQuads(TEXTURES['bow'], 24, 24),
     ['arrow'] = generateQuads(TEXTURES['arrow'], 20, 12),
+    ['bosst'] = generateQuads(TEXTURES['bosst'], 32, 32)
 }
+
 
 FONTS = {
     ['princess'] = love.graphics.newFont('fonts/princess.otf', 32),
